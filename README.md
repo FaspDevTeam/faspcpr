@@ -57,7 +57,7 @@ Build *FASPCPR*:
 
 ## Running
 
-[**The data**](https://github.com/zhaoli0321/faspcpr-data.git) needs to be downloaded and moved into the data directory.
+[**The data**](https://pan.baidu.com/s/1JUHI1y6uSpPjCNRawHOFMw) (Extraction code: fasp) needs to be downloaded and moved into the faspcpr/data directory.
 
 ```makefile
 export OMP_NUM_THREADS=16  # Specify the number of threads
