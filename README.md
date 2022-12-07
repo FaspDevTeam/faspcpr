@@ -8,9 +8,9 @@ FASPCPR is based on the preconditioner method described in the following article
 
 > Li Zhao and Chunsheng Feng and Chensong Zhang and Shi Shu,
 >
-> [Parallel Multi-Stage Preconditioners with Adaptive Setup for the Black Oil Model](https://arxiv.org/abs/2201.01970),
+> [Parallel Multi-Stage Preconditioners with Adaptive Setup for the Black Oil Model](https://doi.org/10.1016/j.cageo.2022.105230),
 >
-> 2022, preprint."
+> Computers & Geosciences, 2022, 168: 105230."
 
 ## Directory Structure
 
