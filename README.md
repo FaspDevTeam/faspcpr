@@ -6,11 +6,8 @@ An efficient parallel Constrained Pressure Residual (CPR) preconditioner with an
 
 FASPCPR is based on the preconditioner method described in the following article:
 
-> Li Zhao and Chunsheng Feng and Chensong Zhang and Shi Shu,
+> Li Zhao and Chunsheng Feng and Chensong Zhang and Shi Shu. [Parallel Multi-Stage Preconditioners with Adaptive Setup for the Black Oil Model](https://doi.org/10.1016/j.cageo.2022.105230), Computers & Geosciences, 2022, 168: 105230.
 >
-> [Parallel Multi-Stage Preconditioners with Adaptive Setup for the Black Oil Model](https://doi.org/10.1016/j.cageo.2022.105230),
->
-> Computers & Geosciences, 2022, 168: 105230."
 
 ## Directory Structure
 
