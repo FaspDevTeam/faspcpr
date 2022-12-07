@@ -115,12 +115,13 @@ int main(int argc, const char *argv[])
     if (problem_num == 1) {  
         char *matrixfile1 = "data/A_test1.dat";
         char *rhsfile1    = "data/b_test1.dat";
-    }
-    
-    // Read matrix from file "matrixfile1"
-    fasp_dbsr_read(matrixfile1, &Absr);
-    // Read right hand side from file "rhsfile1"
-    fasp_dvec_read (rhsfile1, &b);
+
+		// Read matrix from file "matrixfile1"
+		fasp_dbsr_read(matrixfile1, &Absr);
+		// Read right hand side from file "rhsfile1"
+		fasp_dvec_read (rhsfile1, &b);
+	}
+	
     // Allocate space for initial solution
     fasp_dvec_alloc(b.row, &x);
         
