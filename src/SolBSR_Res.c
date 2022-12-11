@@ -36,7 +36,7 @@ INT  last_nnz_c    = 0;
 
 
 /**
- * \fn void FASP_BSRSOL (INT *nrowb, INT *ncolb, INT *nnzb, INT *ia, INT *ja,
+ * \fn INT FASP_BSRSOL (INT *nrowb, INT *ncolb, INT *nnzb, INT *ia, INT *ja,
  *                       REAL *a, INT *nb, INT *nrow, REAL *b, REAL *x,
  *                       INT *maxit, REAL *tol, INT *itmethod, INT *restart,
  *                       INT *fillin, INT *output, INT *noconv)
@@ -65,7 +65,7 @@ INT  last_nnz_c    = 0;
  * \date   11/09/2021
  * 
  */
-void FASP_BSRSOL_ASCPR (dBSRmat   *A,
+INT FASP_BSRSOL_ASCPR (dBSRmat   *A,
                         dvector   *b,
                         dvector   *x,
                         ITS_param *itparam,
@@ -83,10 +83,10 @@ void FASP_BSRSOL_ASCPR (dBSRmat   *A,
         last_nnz_c = A->NNZ;
     }
 
-    if ( print_level > 9 ) {
-        fasp_dbsr_write("A_bsr.dat",A);
-        fasp_dvec_write("b.dat",b);
-    }
+    // if ( print_level > 9 ) {
+    //     fasp_dbsr_write("A_bsr.dat",A);
+    //     fasp_dvec_write("b.dat",b);
+    // }
     
 
     /*
@@ -118,12 +118,9 @@ void FASP_BSRSOL_ASCPR (dBSRmat   *A,
 #endif
     for ( i = 0; i < A->ROW; ++i ) order.val[i] = i;
         
-
-	
     if (!fasp_called_times) printf("threshold mu = %d\n", mu); 
     iter = fasp_solver_dbsr_krylov_ASCPR (&Asc, &fsc, x, itparam, iluparam, amgparam, NULL, &order);
                                     
-
     // Clean up   
     fasp_dbsr_free(&Asc);
     fasp_dvec_free(&fsc);
@@ -139,16 +136,16 @@ void FASP_BSRSOL_ASCPR (dBSRmat   *A,
  	    resetup_c = 0;
     }
 
-    if ( print_level > 9 ) {
-		fasp_dvec_write("sol.dat", x);
-        printf("Press ENTER to continue..."); getchar();
-    }
+    // if ( print_level > 9 ) {
+	// 	fasp_dvec_write("sol.dat", x);
+    //     printf("Press ENTER to continue..."); getchar();
+    // }
 
-FINISHED:
+// FINISHED:
 
     ++fasp_called_times;       
     
-    return;
+    return iter;
 }
 
  
@@ -219,7 +216,6 @@ INT fasp_solver_dbsr_krylov_ASCPR ( dBSRmat *A,
         fasp_amg_data_free(mgl,amgparam);
         mgl = fasp_amg_data_create(max_levels);
     }
-
 
     // AMG setup for Pressure block: initialize A, b, x for mgl[0]
 	if ((fasp_called_times==0)||(resetup_c ==1)) {
@@ -304,7 +300,7 @@ INT fasp_solver_dbsr_krylov_ASCPR ( dBSRmat *A,
     fasp_gettime(&solver_start);
     status       = fasp_solver_dbsr_itsolver(A,b,x,&prec,itparam);
     fasp_gettime(&solver_end);
-    
+
     solver_time = solver_end - solver_start;
     total_setup_time += setup_time ; /**< Total setup time                  */
     total_solve_time += solver_time; /**< Total setup time                  */

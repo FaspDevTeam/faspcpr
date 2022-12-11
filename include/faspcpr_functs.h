@@ -47,7 +47,7 @@ void fasp_precond_dbsr_timpes_decoupling2 (REAL *val,
 
 /*-------- In file: fasp4blkoil.c --------*/
 
-void FASP_BSRSOL_ASCPR (dBSRmat   *A,
+INT FASP_BSRSOL_ASCPR (dBSRmat   *A,
                         dvector   *b,
                         dvector   *x,
                         ITS_param *itparam,

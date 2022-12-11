@@ -42,6 +42,7 @@ int main(int argc, const char *argv[])
     dvector    b, x;
     
     // Local variables
+    int status;
     int i, N = 1;
     int problem_num;  // test problem number
     time_t lt  = time(NULL);
@@ -138,12 +139,20 @@ int main(int argc, const char *argv[])
 #endif
 
     for(i = 0; i < N; i++){
-	printf("The number of ASCPR-GMRES calls: %d\n", i);
+	    printf("The number of ASCPR-GMRES calls: %d\n", i);
        	// reset initial guess
        	fasp_dvec_set(b.row, &x, 0.0); 
        	
        	// call FASP_BSRSOL_ASCPR, i.e., ASCPR-GMRES solver
-	FASP_BSRSOL_ASCPR(&Absr, &b, &x, &itparam, &iluparam, &amgparam, mu);
+	    status = FASP_BSRSOL_ASCPR(&Absr, &b, &x, &itparam, &iluparam, &amgparam, mu);
+
+        if (print_level > PRINT_MIN) {
+            if (status < 0) {
+                printf("\n### WARNING: Solver does not converge!\n");
+            } else {
+                printf("\nSolver converges successfully!\n");
+            }
+        }
     }
 
     // end time
